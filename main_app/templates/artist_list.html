@@ -5,26 +5,38 @@
 
 {% block content %}
 
-<h1 class="title is-2 py-5 has-text-centered">Trending Artists</h1>
-<div class="gallery">
-    {% for artist in artists %}
-    <a href="">
-    <div class="card">
-        <div class="card-image">
-        <figure class="image is-square">
-            <img src="{{artist.image}}" alt="{{artist.name}}" />
-        </figure>
+<h1 class="title is-2 py-5 has-text-centered">{{ header }}</h1>
+<form class="mb-6" method="get">
+    <div class="field has-addons has-addons-centered">
+        <div class="control">
+            <input class="input" type="text" name="name" placeholder="Search by artist name">
         </div>
-        <div class="card-header">
-        <p class="card-header-title">{{artist.name}}</p>
-        </div>
+        <div>
+            <input class="button is-success" type="submit" value="Search">
+        </div> &nbsp; &nbsp; 
+        <a class="button is-dark" href="{% url 'artist_list' %}">Clear Search</a> &nbsp; &nbsp; 
+        <a class="button is-success" href="{% url 'artist_create' %}">Add New Artist</a>
     </div>
+</form>
+<div class="gallery pb-6">
+    {% for artist in artists %}
+    <a href="{% url 'artist_detail' artist.pk %}">
+        <div class="card">
+            <div class="card-image">
+                <figure class="image is-square">
+                    <img src="{{artist.img}}" alt="{{artist.name}}" />
+                </figure>
+            </div>
+            <div class="card-header">
+                <p class="card-header-title">{{artist.name}}</p>
+            </div>
+        </div>
     </a>
     {% empty %}
     <article class="message">
-    <div class="message-header">
-        <p>No Artists Available</p>
-    </div>
+        <div class="message-header">
+            <p>No Artists Available</p>
+        </div>
     </article>
     {% endfor %}
 </div>

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Add New Artist{% endblock %}
+
+{% block content %}
+
+<h1 class="title is-2 py-5 has-text-centered">Add an Artist</h1>
+
+<div class="columns is-centered">
+    <div class="column is-four-fifths is-centered">
+        <form class="has-text-centered" method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input class="button mt-3 is-light" type="submit" value="Submit">
+        </form>
+    </div>
+</div>
+
+{% endblock %}
